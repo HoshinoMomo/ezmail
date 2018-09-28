@@ -1,6 +1,6 @@
 package com.github.softeasyzhang.session;
 
-import com.github.softeasyzhang.entity.MailSenderEntity;
+import com.github.softeasyzhang.entity.MailMessageEntity;
 
 /**
  * @author EasyZhang
@@ -11,5 +11,5 @@ public interface MailSessionFactory {
 
      MailSession getMailSession();
 
-     MailSession getMailSession(MailSenderEntity mailSenderEntity);
+     MailSession getMailSession(MailMessageEntity mailMessageEntity);
 }
