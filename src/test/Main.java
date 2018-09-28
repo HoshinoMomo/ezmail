@@ -1,5 +1,3 @@
-package com.github.softeasyzhang.example;
-
 import com.github.softeasyzhang.entity.MailMessageEntity;
 import com.github.softeasyzhang.session.MailSession;
 import com.github.softeasyzhang.session.MailSessionFactory;
