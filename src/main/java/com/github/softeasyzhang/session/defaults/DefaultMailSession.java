@@ -7,7 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Date;
 
 /**
  * @author EasyZhang
@@ -25,8 +27,23 @@ public class DefaultMailSession implements MailSession {
     }
 
     @Override
-    public MimeMessage createMimeMessage(MailMessageEntity mailMessageEntity) {
+    public MimeMessage createMimeMessage(MailMessageEntity mailMessageEntity) throws Exception{
         Session session = Session.getInstance(configuration.getProperties());
         session.setDebug(true);
+
+        MimeMessage mimeMessage = new MimeMessage(session);
+        //form
+        mimeMessage.setFrom(new InternetAddress(session.getProperty("sender"),"","UTF-8"));
+        //to
+        mimeMessage.setRecipient(MimeMessage.RecipientType.TO,
+                     new InternetAddress(mailMessageEntity.getReceiver(),"","UTF-8"));
+        //subject
+        mimeMessage.setSubject(mailMessageEntity.getSubject());
+        //content
+        mimeMessage.setContent(mailMessageEntity.getMessage(),"text/html;charset=UTF-8");
+        //send date
+        mimeMessage.setSentDate(new Date());
+        mimeMessage.saveChanges();
+        return mimeMessage;
     }
 }
