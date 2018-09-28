@@ -23,5 +23,6 @@ public class Main {
         mailMessageEntity.setSubject("test");
 
         mailSession.sendMail(mailMessageEntity);
+        mailSession.close();
     }
 }

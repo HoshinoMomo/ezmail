@@ -23,21 +23,30 @@ public class DefaultMailSession implements MailSession {
     private static final Logger logger = LoggerFactory.getLogger(DefaultMailSession.class);
 
     private final Configuration configuration;
+    private final Transport transport;
 
-    public DefaultMailSession(Configuration configuration){
+    public DefaultMailSession(Configuration configuration) throws Exception{
         this.configuration = configuration;
+        if(configuration.isPooled()){
+            transport = null;
+        }else {
+            UnpooledTransportFactory unpooledTransportFactory = new UnpooledTransportFactory();
+            transport = unpooledTransportFactory.getUnpooledTransport(configuration).getConnect();
+        }
     }
 
     @Override
     public void sendMail(MailMessageEntity mailMessageEntity) throws Exception{
-        if(configuration.isPooled()){
+        MimeMessage mimeMessage = createMimeMessage(mailMessageEntity);
+        transport.sendMessage(mimeMessage,mimeMessage.getAllRecipients());
+    }
 
-        }else {
-            UnpooledTransportFactory unpooledTransportFactory = new UnpooledTransportFactory();
-            MimeMessage mimeMessage = createMimeMessage(mailMessageEntity);
-            Transport transport = unpooledTransportFactory.getUnpooledTransport(configuration).getConnect();
-            transport.sendMessage(mimeMessage,mimeMessage.getAllRecipients());
+    @Override
+    public void close() {
+        try {
             transport.close();
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
         }
     }
 

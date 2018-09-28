@@ -2,7 +2,6 @@ package com.github.softeasyzhang.session;
 
 import com.github.softeasyzhang.entity.MailMessageEntity;
 
-import javax.mail.internet.MimeMessage;
 
 /**
  * @author EasyZhang
@@ -10,5 +9,15 @@ import javax.mail.internet.MimeMessage;
  */
 public interface MailSession {
 
+    /**
+     * send the mail
+     * @param mailMessageEntity
+     * @throws Exception
+     */
     void sendMail(MailMessageEntity mailMessageEntity) throws Exception;
+
+    /**
+     * close the session
+     */
+    void close();
 }
