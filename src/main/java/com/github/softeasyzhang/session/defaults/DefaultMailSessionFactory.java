@@ -27,11 +27,12 @@ public class DefaultMailSessionFactory implements MailSessionFactory {
     }
 
     @Override
-    public MailSession getMailSession(Configuration configuration) {
-        return new DefaultMailSession(configuration);
-    }
-
-    public Configuration getConfiguration() {
-        return configuration;
+    public MailSession getMailSession(Configuration configuration){
+        try {
+            return new DefaultMailSession(configuration);
+        }catch (Exception e){
+            logger.error(e.getMessage(),e);
+            return null;
+        }
     }
 }

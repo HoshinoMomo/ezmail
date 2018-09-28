@@ -11,6 +11,12 @@ import com.github.softeasyzhang.session.Configuration;
 
 public interface TransportFactory {
 
+    /**
+     * getUnpooledTransport
+     * @param configuration
+     * @return
+     * @throws Exception
+     */
     UnpooledTransport getUnpooledTransport(Configuration configuration) throws Exception;
 
 }
