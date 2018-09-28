@@ -3,6 +3,7 @@ package com.github.softeasyzhang.session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.mail.Session;
 import java.util.Properties;
 
 /**
@@ -11,25 +12,51 @@ import java.util.Properties;
  */
 
 public class Configuration {
-
-    protected Properties properties;
-    protected boolean isPools;
-
     private static final Logger logger = LoggerFactory.getLogger(Configuration.class);
+
+    protected Session session;
+    protected Properties properties;
+    protected boolean isPooled;
+    protected boolean isDebug;
+
+    public Configuration(Properties properties,boolean isPooled, boolean isDebug){
+        this.properties = properties;
+        this.session = Session.getInstance(properties);
+        this.isDebug = isDebug;
+        this.session.setDebug(isDebug);
+    }
+
+    public Configuration(Properties properties,boolean isPooled){
+        this.properties = properties;
+        this.session = Session.getInstance(properties);
+        this.isDebug = true;
+        this.session.setDebug(true);
+    }
+
+    public Configuration(Properties properties){
+        this.properties = properties;
+        this.session = Session.getInstance(properties);
+        this.isDebug = true;
+        this.session.setDebug(true);
+    }
+
+    public Configuration(Session session){
+        this.session = session;
+    }
 
     public Properties getProperties() {
         return properties;
     }
 
-    public boolean isPools() {
-        return isPools;
+    public boolean isPooled() {
+        return isPooled;
     }
 
-    public void setPools(boolean pools) {
-        isPools = pools;
+    public void setPooled(boolean pooled) {
+        isPooled = pooled;
     }
 
-    public void setProperties(Properties properties) {
-        this.properties = properties;
+    public Session getSession() {
+        return session;
     }
 }

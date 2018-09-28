@@ -9,6 +9,8 @@ import com.github.softeasyzhang.entity.MailMessageEntity;
 
 public interface MailSessionFactory {
 
+     MailSession getMailSession();
+
      MailSession getMailSession(Configuration configuration);
 
 }

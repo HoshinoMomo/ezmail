@@ -22,6 +22,11 @@ public class DefaultMailSessionFactory implements MailSessionFactory {
     }
 
     @Override
+    public MailSession getMailSession() {
+        return getMailSession(configuration);
+    }
+
+    @Override
     public MailSession getMailSession(Configuration configuration) {
         return new DefaultMailSession(configuration);
     }
