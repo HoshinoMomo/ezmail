@@ -1,6 +1,6 @@
 package com.github.softeasyzhang.session.defaults;
 
-import com.github.softeasyzhang.entity.MailSenderEntity;
+import com.github.softeasyzhang.session.Configuration;
 import com.github.softeasyzhang.session.MailSession;
 import com.github.softeasyzhang.session.MailSessionFactory;
 import org.slf4j.Logger;
@@ -15,11 +15,18 @@ public class DefaultMailSessionFactory implements MailSessionFactory {
 
     private static final Logger logger = LoggerFactory.getLogger(DefaultMailSessionFactory.class);
 
-    public MailSession getMailSession() {
-        return null;
+    private final Configuration configuration;
+
+    public DefaultMailSessionFactory(Configuration configuration){
+        this.configuration = configuration;
     }
 
-    public MailSession getMailSession(MailSenderEntity mailSenderEntity) {
-        return null;
+    @Override
+    public MailSession getMailSession(Configuration configuration) {
+        return new DefaultMailSession(configuration);
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
     }
 }
