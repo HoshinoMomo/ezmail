@@ -5,13 +5,6 @@ import com.github.softeasyzhang.session.MailSession;
 import com.github.softeasyzhang.session.MailSessionFactory;
 import com.github.softeasyzhang.session.MailSessionFactoryBuilder;
 
-import javax.mail.Message;
-import javax.mail.Transport;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.Properties;
-
 /**
  * @author EasyZhang
  * @date 2018/9/28 -  14:45
@@ -29,6 +22,6 @@ public class Main {
         mailMessageEntity.setMessage("damaxiya");
         mailMessageEntity.setSubject("test");
 
-        Message message = mailSession.createMimeMessage(mailMessageEntity);
+        mailSession.sendMail(mailMessageEntity);
     }
 }

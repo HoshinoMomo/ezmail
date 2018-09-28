@@ -10,6 +10,5 @@ import javax.mail.internet.MimeMessage;
  */
 public interface MailSession {
 
-    MimeMessage createMimeMessage(MailMessageEntity mailMessageEntity) throws Exception;
-
+    void sendMail(MailMessageEntity mailMessageEntity) throws Exception;
 }
