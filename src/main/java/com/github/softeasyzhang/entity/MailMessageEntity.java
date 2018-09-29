@@ -1,6 +1,7 @@
 package com.github.softeasyzhang.entity;
 
 /**
+ * the message entity for user setting
  * @author EasyZhang
  * @date 2018/9/27 -  11:23
  */
